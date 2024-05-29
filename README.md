@@ -18,3 +18,4 @@
 - [1. 인터넷 네트워크](HTTP/1.internet-network.md)
 - [2. URI와 웹 브라우저 요청 흐름](HTTP/2.uri-webbrowser.md)
 - [3. HTTP 기본](HTTP/3.http.md)
+- [4. HTTP Method](HTTP/4.http-method.md)
