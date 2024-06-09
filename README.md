@@ -21,3 +21,4 @@
 - [4. HTTP Method](HTTP/4.http-method.md)
 - [5. HTTP Method 활용](HTTP/5.http-method-use.md)
 - [6. HTTP 상태 코드](HTTP/6.http-status.md)
+- [7. HTTP 헤더 - 일반](HTTP/7.http-header1.md)
