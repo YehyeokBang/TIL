@@ -22,3 +22,4 @@
 - [5. HTTP Method 활용](HTTP/5.http-method-use.md)
 - [6. HTTP 상태 코드](HTTP/6.http-status.md)
 - [7. HTTP 헤더 - 일반](HTTP/7.http-header1.md)
+- [8. HTTP 헤더 - 캐시](HTTP/8.http-header2.md)
