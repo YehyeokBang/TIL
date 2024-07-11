@@ -16,6 +16,7 @@
 ### Spring Data JPA
 
 - [CascadeType(영속성 전이 유형)](Spring/Spring-Data-JPA/CascadeType.md)
+- [Projections](Spring/Spring-Data-JPA/Projections.md)
 
 ## HTTP
 
