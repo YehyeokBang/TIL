@@ -10,12 +10,13 @@
 - [Wrapper Class](Java/WrapperClass.md)
 - [컬렉션을 리스트로 수집하기](Java/CollectingCollectionsIntoList.md)
 - [Overloading & Overriding](Java/Overloading%26Overriding.md)
+- [Garbage Collection](Java/GarbageCollection.md)
 
 ## Spring
 
 ### Spring Data JPA
 
-- [CascadeType(영속성 전이 유형)](Spring/Spring-Data-JPA/CascadeType.md)
+- [CascadeType (영속성 전이 유형)](Spring/Spring-Data-JPA/CascadeType.md)
 - [Projections](Spring/Spring-Data-JPA/Projections.md)
 
 ## HTTP
