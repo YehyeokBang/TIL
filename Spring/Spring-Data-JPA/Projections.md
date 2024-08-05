@@ -255,7 +255,7 @@ List<User> members = userRepository.findAllBy(User.class);
 List<UserName> names = userRepository.findAllBy(UserName.class);
 ```
 
-# Join을 사용한다면?
+# 중첩된 구조인 경우?
 
 - 공식문서에는 단일 엔티티에 대한 프로젝션만을 다루고 있지만, 대부분의 프로젝트에서는 엔티티 간의 관계를 맺고 있을 것이다. 여러 시도를 해보면서 확인해보자.
 
@@ -273,9 +273,11 @@ public class Post {
 
     private String content;
 
-    private String author;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User author;
 
-    public Post(String title, String content, String author) {
+    public Post(String title, String content, User author) {
         this.title = title;
         this.content = content;
         this.author = author;
@@ -297,7 +299,7 @@ public class User {
 
     private int age;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
     private List<Post> posts = new ArrayList<>();
 
     public User(String name, int age) {
@@ -311,40 +313,54 @@ public class User {
 }
 ```
 
+- `Post` 엔티티는 `User` 엔티티와 `ManyToOne` 관계를 맺고 있다.
 - `User` 엔티티는 `Post` 엔티티와 `OneToMany` 관계를 맺고 있다.
 
-## 사용자의 이름과 작성한 게시글 수 조회하기
+## 게시글의 제목과 작성자의 이름을 가져와보기.
 
 ```java
-public interface UserNameAndPostCount {
-    String getName();
-    Long getPostCount();
+public interface NestedProjections {
+
+    String getTitle();
+    AuthorInfo getAuthor();
+
+    interface AuthorInfo {
+        String getName();
+    }
 }
 ```
 
 ```java
-public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("SELECT u.name AS name, COUNT(p) AS postCount FROM User u LEFT JOIN u.posts p GROUP BY u.name")
-    <T> List<T> findUserPostCount(Class<T> type);
+public interface PostRepository extends JpaRepository<Post, Long> {
+
+    <T> List<T> findProjectionsBy(Class<T> tClass);
 }
 ```
 
-- `User` 엔티티와 `Post` 엔티티를 조인하여 사용자의 이름과 작성한 게시글 수를 조회하는 쿼리를 작성했다.
+- Post 엔티티의 `title` 필드와 `author` 필드(User 엔티티)의 `name` 필드를 조회하는 프로젝션을 정의했다.
 - Dynamic Projections를 사용하여 호출 시점에 사용할 타입을 선택하도록 구현했다.
 
 ### 결과 확인
 
 ```java
 @Test
-@DisplayName("Join + Projection 쿼리 확인")
-void joinAndProjection() {
-    // 3개의 게시글 작성
-    // 사용자1: 2개, 사용자2: 1개, 사용자3: 0개 게시글 작성 (3명의 사용자)
+@DisplayName("중첩 프로젝션 사용해보기")
+void nestedProjections() {
+    User user1 = new User("bang1", 21);
+    User user2 = new User("bang2", 22);
+    User user3 = new User("bang3", 23);
 
-    List<UserNameAndPostCount> list = userRepository.findUserPostCount(UserNameAndPostCount.class);
+    Post post1 = new Post("title1", "content1", user1);
+    Post post2 = new Post("title2", "content2", user2);
+    Post post3 = new Post("title3", "content3", user3);
 
-    for (UserNameAndPostCount user : list) {
-        System.out.println("user name : " + user.getName() + ", post count : " + user.getPostCount());
+    userRepository.saveAll(List.of(user1, user2, user3));
+    postRepository.saveAll(List.of(post1, post2, post3));
+
+    List<NestedProjections> result = postRepository.findProjectionsBy(NestedProjections.class);
+    for (NestedProjections nestedProjections : result) {
+        System.out.println("nestedProjections.getTitle() = " + nestedProjections.getTitle());
+        System.out.println("nestedProjections.getAuthor().getName() = " + nestedProjections.getAuthor().getName());
     }
 }
 ```
@@ -352,31 +368,38 @@ void joinAndProjection() {
 ```sql
 Hibernate:
     select
-        u1_0.name,
-        count(p1_0.posts_id)
+        p1_0.title,
+        a1_0.id,
+        a1_0.age,
+        a1_0.name
     from
-        user u1_0
+        post p1_0
     left join
-        user_posts p1_0
-            on u1_0.id=p1_0.user_id
-    group by
-        u1_0.name
+        user a1_0
+            on a1_0.id=p1_0.user_id
 
 -- print result
--- user name : 사용자1, post count : 2
--- user name : 사용자2, post count : 1
--- user name : 사용자3, post count : 0
+-- nestedProjections.getTitle() = title1
+-- nestedProjections.getAuthor().getName() = bang1
+-- nestedProjections.getTitle() = title2
+-- nestedProjections.getAuthor().getName() = bang2
+-- nestedProjections.getTitle() = title3
+-- nestedProjections.getAuthor().getName() = bang3
 ```
 
-- `User` 엔티티와 `Post` 엔티티를 조인하여 사용자의 이름과 작성한 게시글 수를 조회하는 것을 확인할 수 있다. 이처럼 다소 복잡한 쿼리도 `Projections`를 사용하여 원하는 필드만 조회할 수 있다.
-- DTO를 활용한 방법에서는 `@Query` 어노테이션에 `"SELECT new dto.경로.UserNameAndPosts(u.name, COUNT(p.id)) FROM User u LEFT JOIN u.posts p GROUP BY u.name"`과 같은 값을 넣어주어야 한다. DTO 클래스의 경로를 정확히 적어주어야 한다.
+- `Post` 엔티티의 `title` 필드와 `author` 필드의 `name` 필드를 조회하는 것을 확인할 수 있다.
+- 자동으로 `JOIN` 쿼리가 생성되어 `author` 필드의 `name` 필드를 조회하는 것을 확인할 수 있다.
 
 ## 정리
 
 - `Projections`를 사용하여 엔티티의 일부 필드만 조회할 수 있다.
 - `Dynamic Projections`는 호출 시점에 사용할 타입을 선택하고 싶을 때 사용한다.
 - `Entity` 자체를 반환하는 것보다 필요한 필드만 조회하여 반환하는 것이 성능상 이점이 있다.
-- `Join`을 사용하여 여러 엔티티를 조회할 때도 `Projections`를 사용하여 원하는 필드만 조회할 수 있다.
+- 중첩된 구조인 경우에도 `Projections`를 사용하여 필요한 필드만 조회할 수 있다.
+
+## 생각
+
+필요하지 않는 컬럼의 데이터 크기가 큰 경우 `Projections`를 사용하여 필요한 필드만 조회하는 것이 성능상 이점이 있을 것 같다. 하지만 `Projections`을 통해 조회한 데이터는 영속성 컨텍스트에서 관리되지 않기 때문에 조회 기능에만 사용하는 것이 좋을 것 같다. 또한 `Projections`을 화면에 핏하게 맞춰서 사용할 때 주로 사용하게 될 것 같은데. 화면이 자주 변경되는 경우 유연성이 떨어지고 유지보수성이 낮아질 수 있을 것 같다. 실제 사용하게 된다면, 장단점과 함께 성능 테스트를 비교해보면서 사용해야 할 것 같다.
 
 ## 참고 자료
 
