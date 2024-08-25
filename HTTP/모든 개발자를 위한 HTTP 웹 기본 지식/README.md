@@ -10,3 +10,5 @@
 - [6. HTTP 상태 코드](./6.http-status.md)
 - [7. HTTP 헤더 - 일반](./7.http-header1.md)
 - [8. HTTP 헤더 - 캐시](./8.http-header2.md)
+
+[배운 것을 바탕으로 스터디 진행 후 작성한 회고](https://velog.io/@hyeok_1212/%EC%8A%A4%ED%84%B0%EB%94%94-%EC%A7%84%ED%96%89-%ED%9A%8C%EA%B3%A0)
