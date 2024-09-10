@@ -21,6 +21,10 @@
 - [CascadeType (영속성 전이 유형)](Spring/Spring-Data-JPA/CascadeType.md)
 - [Projections](Spring/Spring-Data-JPA/Projections.md)
 
+### Spring Security
+
+- [CSRF (feat. Synchronizer Token Pattern)](Spring/Spring-Security/CSRF.md)
+
 ## HTTP
 
 - [모든 개발자를 위한 HTTP 웹 기본 지식 - 인프런](HTTP/모든%20개발자를%20위한%20HTTP%20웹%20기본%20지식/README.md)
