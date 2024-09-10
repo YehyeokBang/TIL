@@ -232,10 +232,6 @@ public class SpaCsrfTokenRequestHandler extends CsrfTokenRequestAttributeHandler
 @Component
 public class CsrfCookieFilter extends OncePerRequestFilter {
 
-    private static final String CSRF_COOKIE_NAME = "XSRF-TOKEN";
-    private static final String COOKIE_SAMESITE = "Lax";
-    private static final String COOKIE_PATH = "/";
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
