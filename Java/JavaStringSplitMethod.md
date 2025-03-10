@@ -183,3 +183,83 @@ split() 메서드의 withDelimiters 매개변수는 구분자를 결과 배열�
 `split()` 메서드를 사용할 때, limit과 withDelimiters 매개변수를 사용하여 원하는 결과를 얻을 수 있다. 또한, 공백을 제거하거나 빈 문자열을 포함하도록 설정하여 논리적인 문제를 해결할 수 있다.
 
 자바에서 기본으로 제공하니 별 생각 없이 사용했었는데, 이렇게 내부적으로 어떻게 동작하는지 알게 되어서 좋았다. 앞으로도 항상 의심하고 검증하는 습관을 가지도록 해야겠다.
+
+## 추가 (생성형 AI 응답입니다.)
+
+`String.split()`과 `StringTokenizer` 비교
+
+String.split()과 StringTokenizer는 모두 문자열을 분리하는 데 사용되지만, 동작 방식과 특성에 차이가 있습니다.
+
+## 1. 기본 동작 비교
+
+| 기능             | String.split()                 | StringTokenizer               |
+| ---------------- | ------------------------------ | ----------------------------- |
+| 반환 타입        | String[] (배열)                | Enumeration (반복자)          |
+| 구분자           | 정규표현식 지원                | 문자 집합 (정규표현식 미지원) |
+| 빈 토큰 처리     | limit 매개변수에 따라 다름     | 기본적으로 무시               |
+| 구분자 포함 여부 | withDelimiters 매개변수로 설정 | 생성자 매개변수로 설정 가능   |
+
+## 2. 사용 예시
+
+### StringTokenizer 사용 예시
+
+```java
+String input = "pobi, jason, brown";
+StringTokenizer tokenizer = new StringTokenizer(input, ",");
+
+List<String> names = new ArrayList<>();
+while (tokenizer.hasMoreTokens()) {
+    names.add(tokenizer.nextToken().trim());
+}
+// 결과: [pobi, jason, brown]
+```
+
+### 연속된 구분자 처리 예시
+
+```java
+// String.split() (limit < 0 사용 시)
+"a,,b,c".split(",", -1);  // 결과: ["a", "", "b", "c"]
+
+// StringTokenizer
+StringTokenizer tokenizer = new StringTokenizer("a,,b,c", ",");
+// 토큰 반복하면 결과: ["a", "b", "c"] (빈 토큰 무시)
+```
+
+## 3. 성능 비교
+
+StringTokenizer는 정규표현식을 사용하지 않기 때문에 단순 구분자 처리에서는 일반적으로 split()보다 빠릅니다.
+
+```
+// 간단한 벤치마크 결과 예시 (1백만 번 반복 시 평균 소요 시간)
+// StringTokenizer: 약 15ms
+// String.split(","): 약 30ms
+// String.split("\\s*,\\s*"): 약 45ms
+```
+
+## 4. 선택 가이드
+
+### StringTokenizer 선택 시기:
+
+단순한 문자 집합으로 구분할 때 (정규표현식이 필요 없을 때)
+성능이 중요한 경우
+연속된 구분자를 하나로 처리하고 싶을 때
+
+### String.split() 선택 시기:
+
+정규표현식을 활용한 복잡한 패턴 매칭이 필요할 때
+빈 토큰을 보존해야 할 때 (limit < 0 옵션 사용)
+함수형 프로그래밍 스타일로 스트림 API와 함께 사용할 때
+
+## 5. 최신 트렌드
+
+Java 8 이후로는 StringTokenizer보다 split()과 스트림 API를 조합하는 방식이 더 많이 사용된다고 해요.
+
+```java
+List<String> names = Arrays.stream("pobi, jason, brown".split(","))
+                           .map(String::trim)
+                           .collect(Collectors.toList());
+```
+
+## 결론
+
+두 방식 모두 각자의 장단점이 있으므로, 상황에 맞게 선택하는 것이 중요합니다. 단순 구분에는 StringTokenizer가 성능상 유리할 수 있으나, 복잡한 처리나 모던 Java 기능 활용 시에는 split()이 더 적합합니다.
