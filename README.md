@@ -28,7 +28,7 @@
 
 ## Database
 
-- [데이터베이스란?](Database/WhatIsDatabase.md)
+- [데이터베이스란?](Database/whatIsDatabase.md)
 - [RDBMS와 릴레이션 모델의 기본 개념](Database/RDBMS&RelationalModel.md)
 - [데이터베이스 키와 무결성 제약 조건](Database/DatabaseKey&IntegrityConstraint.md)
 
