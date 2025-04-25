@@ -32,6 +32,7 @@
 - [RDBMS와 릴레이션 모델의 기본 개념](Database/RDBMS&RelationalModel.md)
 - [데이터베이스 키와 무결성 제약 조건](Database/DatabaseKey&IntegrityConstraint.md)
 - [MySQL과 InnoDB의 주요 특징 및 동작 원리](Database/MySQL&InnoDB.md)
+- [SQL의 정의와 기본 구문 이해 (DDL, DML, DCL)](Database/SQLDefinition&BasicSyntax.md)
 
 ## HTTP
 
