@@ -34,6 +34,7 @@
 - [MySQL과 InnoDB의 주요 특징 및 동작 원리](Database/MySQL&InnoDB.md)
 - [SQL의 정의와 기본 구문 이해 (DDL, DML, DCL)](Database/SQLDefinition&BasicSyntax.md)
 - [JOIN의 정의와 종류 이해](Database/JoinDefinition&Types.md)
+- [SELECT 절의 처리 순서](Database/SelectClauseProcessingOrder.md)
 
 ## HTTP
 
