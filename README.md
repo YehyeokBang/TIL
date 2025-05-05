@@ -35,6 +35,7 @@
 - [SQL의 정의와 기본 구문 이해 (DDL, DML, DCL)](Database/SQLDefinition&BasicSyntax.md)
 - [JOIN의 정의와 종류 이해](Database/JoinDefinition&Types.md)
 - [SELECT 절의 처리 순서](Database/SelectClauseProcessingOrder.md)
+- [데이터베이스에서 지우기 DELETE, TRUNCATE, DROP](Database/DeleteInDatabase.md)
 
 ## HTTP
 
