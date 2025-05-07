@@ -36,6 +36,7 @@
 - [JOIN의 정의와 종류 이해](Database/JoinDefinition&Types.md)
 - [SELECT 절의 처리 순서](Database/SelectClauseProcessingOrder.md)
 - [데이터베이스에서 지우기 DELETE, TRUNCATE, DROP](Database/DeleteInDatabase.md)
+- [LIMIT과 OFFSET으로 페이징 처리하기 (feat. 커서 기반 페이징)](Database/PagingWithLimitAndOffset.md)
 
 ## HTTP
 
