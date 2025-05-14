@@ -21,6 +21,7 @@
 
 - [CascadeType (영속성 전이 유형)](Spring/Spring-Data-JPA/CascadeType.md)
 - [Projections](Spring/Spring-Data-JPA/Projections.md)
+- [Association Mapping 관련 궁금증](Spring/Spring-Data-JPA/AssociationMapping.md)
 
 ### Spring Security
 
