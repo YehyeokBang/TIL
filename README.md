@@ -51,3 +51,4 @@
 - [소프트웨어 장인](Book/소프트웨어_장인.md)
 - [이펙티브 자바](Book/EffectiveJava/이펙티브_자바.md)
 - [테스트 주도 개발 시작하기](Book/테스트_주도_개발_시작하기.md)
+- [켄트 백의 Tidy First?](Book/켄트_벡의_Tidy_First.md)
