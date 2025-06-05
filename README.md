@@ -39,6 +39,7 @@
 - [데이터베이스에서 지우기 DELETE, TRUNCATE, DROP](Database/DeleteInDatabase.md)
 - [LIMIT과 OFFSET으로 페이징 처리하기 (feat. 커서 기반 페이징)](Database/PagingWithLimitAndOffset.md)
 - [인덱스란? 개념과 작동 방식 이해하기](Database/WhatIsIndex.md)
+- [B-Tree와 B+Tree 구조의 차이](Database/BTree&BPlusTree.md)
 
 ## HTTP
 
