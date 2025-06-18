@@ -40,6 +40,7 @@
 - [LIMIT과 OFFSET으로 페이징 처리하기 (feat. 커서 기반 페이징)](Database/PagingWithLimitAndOffset.md)
 - [인덱스란? 개념과 작동 방식 이해하기](Database/WhatIsIndex.md)
 - [B-Tree와 B+Tree 구조의 차이](Database/BTree&BPlusTree.md)
+- [다중 컬럼 인덱스와 커버링 인덱스 활용](Database/CompositeIndexAndCoveringIndex.md)
 
 ## HTTP
 
