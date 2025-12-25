@@ -17,7 +17,8 @@
 
 ## OOP
 
-- [단일 책임 원칙 (Single Responsibility Principle)](OOP/SingleResponsibilityPrinciple.md)
+- [Single Responsibility Principle(단일 책임 원칙)](OOP/SingleResponsibilityPrinciple.md)
+- [Open-Closed Principle(개방-폐쇄 원칙)](OOP/OpenClosedPrinciple.md)
 
 ## Spring
 
