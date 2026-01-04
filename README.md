@@ -19,6 +19,7 @@
 
 - [Single Responsibility Principle(단일 책임 원칙)](OOP/SingleResponsibilityPrinciple.md)
 - [Open-Closed Principle(개방-폐쇄 원칙)](OOP/OpenClosedPrinciple.md)
+- [Liskov Substitution Principle(리스코프 치환 원칙)](OOP/LiskovSubstitutionPrinciple.md)
 
 ## Spring
 
