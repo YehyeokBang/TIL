@@ -21,6 +21,7 @@
 - [Open-Closed Principle(개방-폐쇄 원칙)](OOP/OpenClosedPrinciple.md)
 - [Liskov Substitution Principle(리스코프 치환 원칙)](OOP/LiskovSubstitutionPrinciple.md)
 - [Interface Segregation Principle(인터페이스 분리 원칙)](OOP/InterfaceSegregationPrinciple.md)
+- [Dependency Inversion Principle(의존성 역전 원칙)](OOP/DependencyInversionPrinciple.md)
 
 ## Spring
 
