@@ -139,3 +139,7 @@ OrderService ───▶ OrderRepository ◀─── MysqlOrderRepository
 DIP는 단순히 인터페이스를 쓰자는 원칙이 아니다.
 고수준 정책이 저수준 구현의 변경에 끌려다니지 않도록, 의존성의 방향을 바꾸는 설계 원칙이다.
 이를 통해 변경 전파를 차단하고, 테스트와 확장에 유리한 구조를 만들 수 있다.
+
+## 참고 자료
+
+- [모든 개발자가 알아야 할 SOLID의 진실 혹은 거짓, KakaoBank Tech, Loopy](https://tech.kakaobank.com/posts/2411-solid-truth-or-myths-for-developers/)
