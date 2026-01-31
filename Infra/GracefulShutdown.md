@@ -3,6 +3,22 @@
 무중단 배포를 학습하던 중, 애플리케이션이 종료되는 순간에도 사용자 입장에서 중단을 느끼지 않으려면 어떤 조건이 필요할지 궁금해졌다.
 그래서 애플리케이션 종료 시점과 관련된 내용을 학습해보고자 한다.
 
+- [Graceful Shutdown이란?](#graceful-shutdown이란)
+- [OS 관점](#os-관점)
+    - [SIGTERM (Signal 15)](#sigterm-signal-15)
+    - [SIGKILL (Signal 9)](#sigkill-signal-9)
+- [kill 명령어로 시그널 보내보기](#kill-명령어로-시그널-보내보기)
+    - [SIGTERM 보내기](#sigterm-보내기)
+    - [SIGKILL 보내기](#sigkill-보내기)
+- [Spring Boot에서의 Graceful Shutdown](#spring-boot에서의-graceful-shutdown)
+    - [동작 과정](#동작-과정)
+    - [주의사항: 비동기 작업(@Async)의 함정](#주의사항-비동기-작업async의-함정)
+- [그러면 블루-그린 배포에서는?](#그러면-블루-그린-배포에서는)
+    - [문제가 되는 경우: 강제 종료(kill -9)](#문제가-되는-경우-강제-종료kill--9)
+    - [의도된 종료: SIGTERM + Graceful Shutdown](#의도된-종료-sigterm--graceful-shutdown)
+    - [무중단 배포에서 “중단”의 기준](#무중단-배포에서-중단의-기준)
+- [참고 자료](#참고-자료)
+
 ## Graceful Shutdown이란?
 
 Graceful Shutdown은 애플리케이션이 종료될 때
