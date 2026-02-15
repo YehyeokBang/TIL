@@ -14,6 +14,7 @@
 - [Garbage Collection](Java/GarbageCollection.md)
 - [StringBuilder & StringBuffer](Java/StringBuilder&StringBuffer.md)
 - [Java String Split Method](Java/JavaStringSplitMethod.md)
+- [Error vs Exception](Java/ErrorVsException.md)
 
 ## OOP
 
